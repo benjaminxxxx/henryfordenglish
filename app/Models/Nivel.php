@@ -9,5 +9,5 @@ class Nivel extends Model
 {
     use HasFactory;
 
-    protected $table="Nivel";
+    protected $table="nivel";
 }
