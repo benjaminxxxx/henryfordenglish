@@ -12,7 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
+        <link rel="icon" type="image/png" href="{{url('image/logo.png')}}">
         @livewireStyles
 
         <!-- Scripts -->
