@@ -1,0 +1,262 @@
+.color_m {
+    text-indent: -337px;
+}
+.colpick_dark {
+    z-index: 50;
+}
+.bg-admin{
+    background: url('https://www.exportaperuonline.com/static/images/bg-home.jpg');
+    background-size: cover;
+}
+.h-40{
+    height: 40vh;
+}
+.z-99{
+    z-index: 99;
+}
+.toggle__dot {
+    top: -.25rem;
+    left: -.25rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.pretty-check:checked ~ .toggle__dot {
+    transform: translateX(100%);
+    background-color: #5850EC;
+}
+.bg-darker{
+    background: #1D1D1D
+}
+.bg-dark-2{
+    background: #262626;
+}
+.hover\:bg-darkh:hover{
+    background: #404040;
+}
+
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+*:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    outline-width: 0 !important; 
+}
+
+.inputfile + label {
+    max-width: 100%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0;
+}
+
+.direct-chat-msg a{
+    color: #ffffff !important;
+    background: #00a1ff;
+    display: block;
+    padding: 5px 11px;
+    border-radius: 9px;
+    overflow: hidden;
+    word-break: break-word;
+    font-size: 13px;
+}
+.direct-chat-text {
+    border-radius: 5px;
+    position: relative;
+    padding: 5px 10px;
+    background: #d2d6de;
+    border: 1px solid #d2d6de;
+    margin: 5px 0 0 50px;
+    color: #444;
+    word-break: break-word;
+}
+.direct-chat-text audio{
+    width: 100%;
+    height: 37px;
+    margin: 8px 0;
+}
+.direct-chat-msg, .direct-chat-text {
+    display: block;
+}
+.direct-chat-primary .right>.direct-chat-text:after, .direct-chat-primary .right>.direct-chat-text:before {
+    border-left-color: #3c8dbc;
+}
+.right .direct-chat-text {
+    margin-right: 50px;
+    margin-left: 0;
+}
+.right .direct-chat-text:after, .right .direct-chat-text:before {
+    right: auto;
+    left: 100%;
+    border-right-color: transparent;
+    border-left-color: #d2d6de;
+}
+.direct-chat-info {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 12px;
+    clear: both;
+    overflow: hidden;
+}
+.direct-chat-text:before {
+    border-width: 6px !important;
+    margin-top: -4px;
+}
+.direct-chat-text:after {
+    border-width: 5px !important;
+    margin-top: -4px;
+}
+.direct-chat-text:after, .direct-chat-text:before {
+    position: absolute;
+    right: 100%;
+    top: 15px;
+    border: solid transparent;
+    border-right-color: #d2d6de;
+    content: ' ';
+    height: 0;
+    width: 0;
+    pointer-events: none;
+}
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.pull-left {
+    float: left!important;
+}
+.pull-right {
+    float: right;
+}
+.direct-chat-timestamp {
+    color: #999;
+}
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    /* 4px */
+}
+
+.direct-chat-primary .right>.direct-chat-text {
+    background: #3c8dbc;
+    border-color: #3c8dbc;
+    color: #fff;
+}
+.right .direct-chat-img {
+    object-fit: cover;
+}
+.right .direct-chat-img {
+    float: right;
+}
+.direct-chat-img {
+    border-radius: 50%;
+    float: left;
+    width: 40px;
+    height: 40px;
+}
+.box-body{
+    height: calc(100% - 7rem);
+    overflow-y: auto;
+    padding: 0.24rem;
+}
+.direct-chat-contacts {
+    position: absolute;
+    top: 3rem;
+    bottom: 0;
+    height: calc(100% - 9rem);
+    right: -18rem;
+    width: 100%;
+    background: #262626;
+    border-radius: 0 0 0 5px !important;
+    color: #fff;
+    overflow: auto;
+    transition: all .4s ease-in-out !important;
+}
+.open-user-list:hover{
+    color: #999;
+}
+.direct-chat-contacts.active{
+    right:0rem;
+}
+.box-body, .direct-chat-contacts {
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+    -moz-transition: -moz-transform .5s ease-in-out;
+    -o-transition: -o-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
+}
+.input-field{
+    width: calc(100% - 10rem);
+    height: auto;
+    padding: 0 12px;
+    border-radius: 7px;
+    border: 1px solid #b7b7b7 !important;
+    font-size: 12px;
+    color: #1D1D1D;
+}
+.embed-responsive {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+.embed-responsive-16by9::before {
+    padding-top: 56.25%;
+}
+.embed-responsive::before {
+    display: block;
+    content: "";
+}
+.embed-responsive .embed-responsive-item, .embed-responsive embed, .embed-responsive iframe, .embed-responsive object, .embed-responsive video {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+*::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+}
+*::-webkit-scrollbar-thumb {
+    background: #ff6060;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+*::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+*::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+*::-webkit-scrollbar-track {
+    background: #e1e1e1;
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo cuando esté en active o hover */
+*::-webkit-scrollbar-track:hover,
+*::-webkit-scrollbar-track:active {
+  background: #d4d4d4;
+}
