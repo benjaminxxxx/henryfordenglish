@@ -49,6 +49,10 @@
                 @php
                     $diasdelasemana = ['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
                     $indias = json_decode($dias,true);
+
+                    if($indias==null){
+                        $indias = [];
+                    }
                   
                 @endphp
                 @foreach ($diasdelasemana as $indexd => $dia)
