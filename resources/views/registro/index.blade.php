@@ -37,9 +37,10 @@
 
             <div class="flex items-center justify-end mt-4">
                 
+                <a class="underline text-small text-blue-600 mr-4" style="color: rgb(9, 9, 216)" href="{{route('dashboard')}}">Ya tengo una cuenta</a>
 
                 <x-jet-button class="ml-4">
-                    {{ __('Registrar') }}
+                    REGISTRAR
                 </x-jet-button>
             </div>
         </form>
