@@ -81,7 +81,7 @@ class PracticaController extends Controller{
             $nlink = str_replace(' ','_',$request->titulo);
             
 
-            Practica::updateOrCreate([
+            $newPractica = Practica::updateOrCreate([
                 'id'=>$request->selected_id
             ],[
                 'titulo'=>$request->titulo,
@@ -97,7 +97,7 @@ class PracticaController extends Controller{
             if(is_array($grados) && count($grados)>0){
                 foreach ($grados as $elgrado) {
                     $arrsave[] = [
-                        'practica_id'=>$request->selected_id,
+                        'practica_id'=>$newPractica->id,
                         'nivel_id'=>$elgrado
                         
                     ];
