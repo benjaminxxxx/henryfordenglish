@@ -453,6 +453,7 @@ body .flex-options>label img{
                             totalPoints+=points;
                             unitpoint = points;
                         }
+                        
                         document.getElementById('correcto').play();
                         $('.good').show();
                     }else{

@@ -556,12 +556,13 @@ class PracticaController extends Controller{
             }
 
             $data['stringquestions'] = $arr_total;
+            /*
             if($grado!=null || Auth::user()->type=='teacher'){
                 if($grado>11 || Auth::user()->type=='teacher'){
                     return view('practica.jugar2',$data);
                 }
-            }
-            return view('practica.jugar2',$data);
+            }*/
+            return view('practica.jugar',$data);
     }
     public function preguntas(Request $request){
         $questions = Practica_question::where([

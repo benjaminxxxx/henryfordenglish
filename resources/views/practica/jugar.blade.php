@@ -4,6 +4,10 @@
     $total_points = 0;
     $alp = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'];
 @endphp
+<audio controls id="correcto">
+    <source src="{{asset('sounds/correct.mp3')}}" type="audio/mpeg">
+  Your browser does not support the audio element.
+  </audio>
 <style>
     .question{
         min-height: 94px;
@@ -222,63 +226,76 @@
             });
         });
 
-        
+        var pregunta_respondida = false;
+        $(document).on('change','input[type=radio]',function(e){
+            e.preventDefault();
+            $(this).closest("form").submit();
+        });
 
         $(document).on('submit','.question',function(e){
             e.preventDefault();
-
-            var points = $(this).data('points');
-            var answer = $(this).data('answer');
-            var question_id = $(this).data('question_id');
-            var unitpoint = 0;
-            var myanswer = '';
-
-            var type = $('[name="useranswer"]').attr('type');
-            if(type=='text'){
-                myanswer = $('[name="useranswer"]').val().toUpperCase();
-            }
-            if(type=='radio'){
-                myanswer = $('[name="useranswer"]:checked').val().toUpperCase();
-            }
-
-            var myanswerfake = myanswer.replace(/[.,'?\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-            myanswerfake = myanswerfake.replace(/\s{2,}/g," ");
-            myanswerfake = myanswerfake.replace(/\s/g,'');
             
-            if(answer!=null){
-                answer = String(answer);
-                console.log(answer);
-                console.log(typeof answer);
-                var upperanswer = answer.toUpperCase();
-                upperanswer = upperanswer.replace(/[.,'?\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-                upperanswer = upperanswer.replace(/\s{2,}/g," ");
-                upperanswer = upperanswer.replace(/\s/g,'');
-                console.log('cadena de opciones: ' + upperanswer);
-                var arr_answers = upperanswer.split('|');
-                console.log(arr_answers);
-                if (arr_answers.includes(myanswerfake)) {
-                    if(points!=null){
-                        totalPoints+=points;
-                        unitpoint = points;
-                    }
+            if(pregunta_respondida==false){
+
+                var points = $(this).data('points');
+                var answer = $(this).data('answer');
+                var question_id = $(this).data('question_id');
+                var unitpoint = 0;
+                var myanswer = '';
+
+                var type = $('[name="useranswer"]').attr('type');
+                if(type=='text'){
+                    myanswer = $('[name="useranswer"]').val().toUpperCase();
                 }
-                /*
-                if(answer.toUpperCase()==myanswer){
-                    if(points!=null){
-                        totalPoints+=points;
-                        unitpoint = points;
-                    }
-                }*/
-            }
+                if(type=='radio'){
+                    myanswer = $('[name="useranswer"]:checked').val().toUpperCase();
+                }
 
-            answers[current_quest] = {
-                points:unitpoint,
-                answer:myanswer,
-                question_id:question_id
-            };
-            
-            current_quest++;
-            doQuest();
+                var myanswerfake = myanswer.replace(/[.,'?\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+                myanswerfake = myanswerfake.replace(/\s{2,}/g," ");
+                myanswerfake = myanswerfake.replace(/\s/g,'');
+                
+                if(answer!=null){
+                    answer = String(answer);
+                    console.log(answer);
+                    console.log(typeof answer);
+                    var upperanswer = answer.toUpperCase();
+                    upperanswer = upperanswer.replace(/[.,'?\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+                    upperanswer = upperanswer.replace(/\s{2,}/g," ");
+                    upperanswer = upperanswer.replace(/\s/g,'');
+                    console.log('cadena de opciones: ' + upperanswer);
+                    var arr_answers = upperanswer.split('|');
+                    console.log(arr_answers);
+                    if (arr_answers.includes(myanswerfake)) {
+                        if(points!=null){
+                            totalPoints+=points;
+                            unitpoint = points;
+                        }
+                        
+                        document.getElementById('correcto').play();
+                    }
+                    
+                    /*
+                    if(answer.toUpperCase()==myanswer){
+                        if(points!=null){
+                            totalPoints+=points;
+                            unitpoint = points;
+                        }
+                    }*/
+                }
+
+                answers[current_quest] = {
+                    points:unitpoint,
+                    answer:myanswer,
+                    question_id:question_id
+                };
+                
+                current_quest++;
+                pregunta_respondida = true;
+            }else{
+                pregunta_respondida = false;
+                doQuest();
+            }
 
         });
         
