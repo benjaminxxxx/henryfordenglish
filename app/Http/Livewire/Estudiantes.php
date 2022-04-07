@@ -11,6 +11,8 @@ use App\Models\Practica;
 class Estudiantes extends Component
 {
     public $gradoseleccionado;
+
+    protected $queryString  = ['gradoseleccionado'];
     
     public function render()
     {
