@@ -33,7 +33,7 @@
                     @foreach ($estudiantes as $indexe => $estudiante)
                     <tr>
                         <x-td>{{$indexe+1}}</x-td>
-                        <x-td>{{$estudiante->apellido . ', ' . $estudiante->name}}</x-td>
+                        <x-td>{{$estudiante->apellido . ', ' . $estudiante->name}} <span>[{{$estudiante->dni}}]</span></x-td>
                         
                         @foreach ($dias as $index1 => $dia2)
                             @foreach ($dia2 as $index2 => $lapractica2)

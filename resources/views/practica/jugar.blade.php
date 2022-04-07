@@ -59,7 +59,34 @@
                 if(data==''){
                     doQuest();
                 }else{
-                    $('.questions').html(data);
+
+                    var resuelto = "{{$resuelto}}";
+                    if(resuelto=='true'){
+                        $('.questions').html(data);
+                    }else{
+                        $.ajax({
+                            type: "get",
+                            url: "{{route('practica.responder.json')}}",
+                            data:{
+                                practica_id:"{{$practica_id}}"
+                            },
+                            dataType:'json',
+                            success:function(data){
+                                parse = data.stringquestions;
+                                console.log(data);
+                                current_quest = 0;
+                                
+                                questions = parse;
+                                totalPoints = 0;
+                                answers = {};
+                                doQuest();
+                            },
+                            error: function(errordata){
+                                console.log(errordata);
+                            }
+                        });
+                    }
+                    
                 }
                 
             },
@@ -161,8 +188,10 @@
         }
         var btn = '<button type="submit"   class="send-rr btn-send-a">'+textbtn+'</button>';
 
-        question = '<form class="question '+cssform+'" data-question_id="'+dataquestion.id+'" data-points="'+dataquestion.points+'" data-answer="'+dataquestion.answer+'">';
-        question += '<p class="notranslate">' + dataquestion.question + '</p>';
+        question = '<form class="question relative '+cssform+'" data-question_id="'+dataquestion.id+'" data-points="'+dataquestion.points+'" data-answer="'+dataquestion.answer+'">';
+            var linkinicio = "{{route('dashboard')}}";
+            question += '<div style="position: absolute; right: 0; padding: 8px 20px; font-size: 22px; background: #f96868; color: #fff; border-radius: 4px; margin: 0 14px;"><a href="'+linkinicio+'">Inicio</a></div>';
+            question += '<p class="notranslate">' + dataquestion.question + '</p>';
 
         var str_img  = '';
 

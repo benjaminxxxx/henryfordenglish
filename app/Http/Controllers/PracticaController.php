@@ -33,7 +33,20 @@ class PracticaController extends Controller{
                     $dias = json_decode($practica->dias,true);
                     if(is_array($dias) && count($dias)>0){
                         foreach($dias as $d){
-                            $semana[$d][] = $practica;
+                            $fechapractica = date('Y/m/d',strtotime('this week' . '+' . $d . ' days'));
+                            $fecha_practica = Total_puntos::where(['user_id'=>Auth::user()->id,'tarea_id'=>$practica->id])->whereDate('created_at',$fechapractica)->first();
+                            
+                            $estaresuelto = false;
+
+                            if($fecha_practica!=null){
+                               
+                                $estaresuelto = true;
+                            }
+
+                            $semana[$d][] = [
+                                'estaresuelto' => $estaresuelto,
+                                'practica' => $practica
+                            ];
                         }
                     }
                 }
@@ -482,7 +495,7 @@ class PracticaController extends Controller{
         return view('practica.create',$data);
         
     }
-    public function practica2($id,$practica = null){
+    public function practica2($id,$practica = null,$resuelto = 'false'){
 
         $practica_id = $id;
 
@@ -495,6 +508,8 @@ class PracticaController extends Controller{
         $data = [];
         $data['selected_id'] = null;
         $data['practica_id'] = $practica_id;
+
+        $data['resuelto'] = $resuelto;
 
 
         $data['practica'] = $exist->link;

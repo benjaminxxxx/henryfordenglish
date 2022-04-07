@@ -51,10 +51,28 @@
                                 @foreach($semanas as $dias)
                                 <x-td>
                                     @if (is_array($dias) && count($dias)>0)
-                                        @foreach ($dias as $dia)
+                                        @foreach ($dias as $diass)
+                                        @php
+                                            $dia = $diass['practica'];
+                                            $estaresuelto = $diass['estaresuelto'];
+                                            $estilo = '';
+                                            $estatxt = 'false';
+
+                                            if($estaresuelto){
+                                                $estilo = 'text-green-600';
+                                                $estatxt = 'true';
+                                            }
+                                        @endphp
                                             <x-box class="">
-                                                <a href="{{route('practicar.accion',['id'=>$dia->id,'practica'=>$dia->link])}}">
+                                                <a class="{{$estilo}}" href="{{route('practicar.accion',['id'=>$dia->id,'practica'=>$dia->link,'resuelto'=>$estatxt])}}">
                                                     <p>{{$dia->titulo}}</p>
+                                                    @if($estaresuelto)
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                      </svg>
+                                                    @else
+                                                    Falta
+                                                    @endif
                                                 </a>
                                                 
                                             </x-box>

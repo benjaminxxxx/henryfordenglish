@@ -51,7 +51,7 @@ Route::middleware(['auth:sanctum', 'verified'])->any('/practica/storequestion',[
 Route::middleware(['auth:sanctum', 'verified'])->post('/practica/sendimagequestion',[PracticaController::class,'sendimagequestion'])->name('sendimagequestion');
 Route::middleware(['auth:sanctum', 'verified'])->get('/practica/{id}',[PracticaController::class,'practica'])->name('practicar');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/practica/{id}/{practica?}',[PracticaController::class,'practica2'])->name('practicar.accion');
+Route::middleware(['auth:sanctum', 'verified'])->get('/practica/{id}/{practica?}/{resuelto?}',[PracticaController::class,'practica2'])->name('practicar.accion');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/practicar/getanswers',[PracticaController::class,'getanswers'])->name('practica.getanswers');
