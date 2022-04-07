@@ -20,7 +20,7 @@
                     <x-th colspan="{{count($dia)}}" value="{{$textdias[$index]}}" />
                     @endforeach
                 </tr>
-                <tr style="243px">
+                <tr style="width:243px">
                     @foreach ($dias as $dia)
                         @foreach ($dia as $lapractica)
                         <x-th style="height: 150px" class="-rotate-90	" value="{{$lapractica}}" />
