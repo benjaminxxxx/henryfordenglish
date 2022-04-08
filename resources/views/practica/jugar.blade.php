@@ -26,6 +26,21 @@
     .bg-box {
         max-width: 88% !important;
     }
+    @media(max-width:760px){
+        .bg-box {
+            max-width: 100% !important;
+            padding: 3px;
+        }
+        .alternative {
+            padding: 3px 6px;
+        }
+        .alternative span{
+            display: inline-block
+        }
+        .alternative input[type="radio"]{
+            position: absolute
+        }
+    }
 </style>
 <div class="inset-0 fixed bg-galaxy z-50  fadeShadow">
     <div class="w-full h-full flex items-center justify-center fadeInDown" style="overflow:auto">
@@ -44,7 +59,8 @@
     var questions = JSON.parse(parse);
     var totalPoints = 0;
     var answers = {};
-    
+    var resuelto = "{{$resuelto}}";
+
     function init(){
         //verificar si ya he respondido esto
         
@@ -60,11 +76,12 @@
                     doQuest();
                 }else{
 
-                    var resuelto = "{{$resuelto}}";
+                    
                     if(resuelto=='true'){
                         $('.questions').html(data);
                     }else{
-                        $.ajax({
+                       
+                       $.ajax({
                             type: "get",
                             url: "{{route('practica.responder.json')}}",
                             data:{
@@ -79,6 +96,7 @@
                                 questions = parse;
                                 totalPoints = 0;
                                 answers = {};
+                                resuelto = 'true';
                                 doQuest();
                             },
                             error: function(errordata){
@@ -190,8 +208,8 @@
 
         question = '<form class="question relative '+cssform+'" data-question_id="'+dataquestion.id+'" data-points="'+dataquestion.points+'" data-answer="'+dataquestion.answer+'">';
             var linkinicio = "{{route('dashboard')}}";
-            question += '<div style="position: absolute; right: 0; padding: 8px 20px; font-size: 22px; background: #f96868; color: #fff; border-radius: 4px; margin: 0 14px;"><a href="'+linkinicio+'">Inicio</a></div>';
-            question += '<p class="notranslate">' + dataquestion.question + '</p>';
+            question += '<div class="relative md:absolute right-0 p-2 text-sm text-center bg-red-400 text-white rounded mr-2"><a href="'+linkinicio+'">Inicio</a></div>';
+            question += '<p class="notranslate text-2xl md:text-4xl ">' + dataquestion.question + '</p>';
 
         var str_img  = '';
 
