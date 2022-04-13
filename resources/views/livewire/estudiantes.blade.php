@@ -8,9 +8,7 @@
             @endforeach
         </x-select>
         <hr>
-        @php
-            $textdias = ['Lunes','Martes','Miercoles','Jueves','Viernes'];
-        @endphp
+       
         <x-table-responsive>
             <thead>
                 <tr>
