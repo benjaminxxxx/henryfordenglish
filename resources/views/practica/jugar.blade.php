@@ -72,6 +72,15 @@
 .bad .checks{
     color: rgb(228, 27, 27);
 }
+.btnlink{
+    font-size: .875rem; 
+    line-height: 1.25rem;
+    padding: 0.5rem;
+    background-color: rgb(248 113 113/1);
+    border-radius: 0.25rem;
+    color: #fff;
+    margin:3px
+}
     @media(max-width:760px){
         .bg-box {
             max-width: 100% !important;
@@ -254,7 +263,7 @@
 
         question = '<form class="question relative '+cssform+'" data-question_id="'+dataquestion.id+'" data-points="'+dataquestion.points+'" data-answer="'+dataquestion.answer+'">';
             var linkinicio = "{{route('dashboard')}}";
-            question += '<div class="relative md:absolute right-0 p-2 text-sm text-center bg-red-400 text-white rounded mr-2"><a href="'+linkinicio+'">Inicio</a></div>';
+            question += '<div class="relative md:absolute right-0 text-sm mr-2"><a class="btnlink" href="'+linkinicio+'">Inicio</a><a class="btnlink btnsalir" href="#">Salir</a></div>';
             question += '<p class="notranslate text-2xl md:text-4xl ">' + dataquestion.question + '</p>';
 
         var str_img  = '';
@@ -317,10 +326,29 @@
                 $(this).parent('label').addClass('selectedoption');
             }
         });
+        
         $(document).on('click','.ver-solucion',function(e){
             e.preventDefault();
             $('.to-center').removeClass('to-center');
             $(this).remove();
+        });
+
+        $(document).on('click','.btnsalir',function(e){
+            e.preventDefault();
+            $.ajax({
+                method:'post',
+                url:"{{ route('logout') }}",
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                },
+                success:function(data){
+                    console.log(data);
+                    alert('dddd');
+                },
+                error:function(err){
+                    location.href="{{ route('inicio') }}";
+                }
+            });
         });
 
         $(document).on('click','#try',function(e){
