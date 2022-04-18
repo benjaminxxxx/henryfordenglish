@@ -127,8 +127,9 @@
                 practica_id:"{{$practica_id}}",
             },
             success:function(data){
-                
+                //alert('fin'  + resuelto);
                 if(data==''){
+                  //  alert('ee');
                     resuelto = 'true';
                     doQuest();
                 }else{
