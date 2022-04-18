@@ -115,6 +115,7 @@
     var totalPoints = 0;
     var answers = {};
     var resuelto = "{{$resuelto}}";
+    //var resueltoporprimeravez = 
 
     function init(){
         //verificar si ya he respondido esto
@@ -135,7 +136,7 @@
                     if(resuelto=='true'){
                         $('.questions').html(data);
                     }else{
-                       
+                       console.log('1-' + resuelto);
                        $.ajax({
                             type: "get",
                             url: "{{route('practica.responder.json')}}",
@@ -151,7 +152,9 @@
                                 questions = parse;
                                 totalPoints = 0;
                                 answers = {};
+                                
                                 resuelto = 'true';
+                                console.log(resuelto);
                                 doQuest();
                             },
                             error: function(errordata){
