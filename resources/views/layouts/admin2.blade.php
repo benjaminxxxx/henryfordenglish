@@ -30,6 +30,7 @@ $type = [
                 background: url("{{asset('image/galaxy.svg')}}") no-repeat;
                 background-size: cover;
             }
+            /*
             .alternative{
                 padding: 3px 42px;
     background: #F5DBB8;
@@ -43,6 +44,21 @@ $type = [
     display: block;
     border: 7px solid #B8471A;
     text-align: center;
+            }*/
+            .alternative{
+                padding: '';
+                background: #F5DBB8;
+                border-radius: 29px;
+                /* width: 100%; */
+                margin-bottom: 11px;
+                transition: all .2s ease-in-out;
+                font-family: 'Lilita One', cursive;
+                color: white;
+                margin: 11px auto;
+                display: block;
+                border: 7px solid #B8471A;
+                text-align: center;
+                overflow: hidden;
             }
             .alternative span{
                 font-size: 24px;
