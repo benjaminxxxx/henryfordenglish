@@ -129,6 +129,7 @@
             success:function(data){
                 
                 if(data==''){
+                    resuelto = 'true';
                     doQuest();
                 }else{
 
