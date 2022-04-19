@@ -7,6 +7,7 @@
                 <option value="{{$grado->id}}">{{$grado->grado}}</option>
             @endforeach
         </x-select>
+        <x-input class="ml-2" type="text" wire:model="estudiante" />
         <hr>
        
         <x-table-responsive>
@@ -17,6 +18,7 @@
                     @foreach ($dias as $index => $dia)
                     <x-th colspan="{{count($dia)}}" value="{{$textdias[$index]}}" />
                     @endforeach
+                    <x-th rowspan="2" value="Acciones" />
                 </tr>
                 <tr >
                     @foreach ($dias as $dia)
@@ -31,7 +33,15 @@
                     @foreach ($estudiantes as $indexe => $estudiante)
                     <tr>
                         <x-td>{{$indexe+1}}</x-td>
-                        <x-td>{{$estudiante->apellido . ', ' . $estudiante->name}} <span style="display:none">[{{$estudiante->dni}}]</span></x-td>
+                        @php
+                            $apellido_arr = explode(' ',$estudiante->apellido);
+                            $apellido_s = mb_strtoupper($apellido_arr[0]);
+
+                            $nombre_arr = explode(' ',$estudiante->name);
+                            $nombre_s = mb_strtoupper($nombre_arr[0]);
+                            
+                        @endphp
+                        <x-td>{{$apellido_s . ', ' . $nombre_s}} <span style="display:none">[{{$estudiante->dni}}]</span></x-td>
                         
                         @foreach ($dias as $index1 => $dia2)
                             @foreach ($dia2 as $index2 => $lapractica2)
@@ -53,7 +63,17 @@
                             </x-td>
                             @endforeach
                         @endforeach
-                        
+                        <x-td>
+                            <x-select name="gradoporseleccionar"  onchange="Livewire.emit('change',{{$estudiante->id}},this.value)" class="mb-5">
+                                <option value="">Seleccionar grado</option>
+                                @foreach ($grados as $grado)
+                                    <option value="{{$grado->id}}" {{(($estudiante->nivel_id==$grado->id)?'selected':'')}}>{{$grado->grado}}</option>
+                                @endforeach
+                            </x-select>
+                            <x-danger-button onclick="Livewire.emit('drop',{{$estudiante->id}})" type="button" >
+                                Eliminar
+                            </x-danger-button>
+                        </x-td>
                     </tr>        
                     @endforeach
                 @endif

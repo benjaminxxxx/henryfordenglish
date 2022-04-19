@@ -11,8 +11,10 @@ use App\Models\Practica;
 class Estudiantes extends Component
 {
     public $gradoseleccionado;
+    public $estudiante;
 
-    protected $queryString  = ['gradoseleccionado'];
+    protected $queryString  = ['gradoseleccionado','estudiante'];
+    protected $listeners  = ['change','drop'];
     
     public function render()
     {
@@ -49,7 +51,17 @@ class Estudiantes extends Component
             //$from = date('d/m/Y',strtotime('03/04/2022'));
             //$to = date('d/m/Y',strtotime('07/04/2022'));
 
-            $estudiantes = User::where(['nivel_id'=>$this->gradoseleccionado])->orderBy('apellido','asc')->get();
+            $estudiantes = null;
+
+            if($this->estudiante!=null){
+                $estudiantes = User::where([
+                    ['name','like','%' . $this->estudiante . '%']
+                    ])->orderBy('apellido','asc')->get();
+            }else{
+                $estudiantes = User::where(['nivel_id'=>$this->gradoseleccionado])->orderBy('apellido','asc')->get();
+            }
+
+            
             $puntajes = Total_puntos::where(['grado_id'=>$this->gradoseleccionado])->whereBetween('created_at',[$from,$to])->get();
             $practicas = Practica::whereHas('grados', function($query){
                 $query->where(['nivel_id'=>$this->gradoseleccionado]);
@@ -144,5 +156,20 @@ class Estudiantes extends Component
             'textdias' => $textdias,
             'estudiantes_data'=>$estudiantes_data
         ]);
+    }
+    public function change($id,$grado){
+        $user = User::find($id);
+        if($user!=null){
+            $user->update([
+                'nivel_id'=>$grado
+            ]);
+        }
+    }
+    public function drop($id){
+        $user = User::find($id);
+        if($user!=null){
+            
+            $user->delete();
+        }
     }
 }
