@@ -64,15 +64,18 @@
                             @endforeach
                         @endforeach
                         <x-td>
-                            <x-select name="gradoporseleccionar"  onchange="Livewire.emit('change',{{$estudiante->id}},this.value)" class="mb-5">
+                            <div class="flex items-center">
+                                <x-select name="gradoporseleccionar" style="margin: 0 !important;padding: 4px; max-width:120px"  onchange="Livewire.emit('change',{{$estudiante->id}},this.value)" >
                                 <option value="">Seleccionar grado</option>
                                 @foreach ($grados as $grado)
                                     <option value="{{$grado->id}}" {{(($estudiante->nivel_id==$grado->id)?'selected':'')}}>{{$grado->grado}}</option>
                                 @endforeach
                             </x-select>
-                            <x-danger-button onclick="Livewire.emit('drop',{{$estudiante->id}})" type="button" >
-                                Eliminar
+                            <x-danger-button style="font-size:11px; word-break:no-wrap; margin-left:3px" onclick="Livewire.emit('drop',{{$estudiante->id}})" type="button" >
+                                x
                             </x-danger-button>
+                            </div>
+                            
                         </x-td>
                     </tr>        
                     @endforeach
