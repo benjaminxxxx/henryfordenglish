@@ -35,11 +35,11 @@ class PracticaController extends Controller{
                     if(is_array($dias) && count($dias)>0){
                         foreach($dias as $d){
                             $fechapractica = date('Y-m-d',strtotime('this week' . '+' . $d . ' days'));
-                            
+                            \DB::enableQueryLog();
                             $fecha_practica = Total_puntos::where(['user_id'=>Auth::user()->id,'tarea_id'=>$practica->id])->whereDate('created_at',$fechapractica)->first();
                             
                             $estaresuelto = false;
-                            dd($fecha_practica);
+                            dd(\DB::getQueryLog());
                             if($fecha_practica!=null){
                                
                                 $estaresuelto = true;
