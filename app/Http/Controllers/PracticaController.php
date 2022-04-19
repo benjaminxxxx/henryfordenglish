@@ -39,7 +39,7 @@ class PracticaController extends Controller{
                             $fecha_practica = Total_puntos::where(['user_id'=>Auth::user()->id,'tarea_id'=>$practica->id])->whereDate('created_at',$fechapractica)->first();
                             
                             $estaresuelto = false;
-                            dd($fecha_practica);
+                            dd($practica->id . ' - ' . $fechapractica);
                             if($fecha_practica!=null){
                                
                                 $estaresuelto = true;
