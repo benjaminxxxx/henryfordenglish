@@ -35,19 +35,33 @@ class PracticaController extends Controller{
                     if(is_array($dias) && count($dias)>0){
                         foreach($dias as $d){
                             $fechapractica = date('Y-m-d',strtotime('this week' . '+' . $d . ' days'));
-                            \DB::enableQueryLog();
-                            $fecha_practica = Total_puntos::where(['user_id'=>Auth::user()->id,'tarea_id'=>$practica->id])->whereDate('created_at',$fechapractica)->first();
-                            
+                            //\DB::enableQueryLog();
+                            //$fecha_practica = Total_puntos::where(['user_id'=>Auth::user()->id,'tarea_id'=>$practica->id])->whereDate('created_at',$fechapractica)->first();
+                            $fecha_practica = Total_puntos::where(['user_id'=>Auth::user()->id,'tarea_id'=>$practica->id])->first();
                             $estaresuelto = false;
-                            dd(\DB::getQueryLog());
+                            $nota = '-';
+                            //dd(\DB::getQueryLog());
                             if($fecha_practica!=null){
-                               
-                                $estaresuelto = true;
+                                $todaslasFechas = json_decode($fecha_practica->puntos,true);
+                                
+                                if(is_array($todaslasFechas) && count($todaslasFechas)>0){
+                                    foreach ($todaslasFechas as $datanota) {
+                                        $lafecha = date('Y-m-d',strtotime($datanota['fecha']));
+                                        if($lafecha==$fechapractica){
+
+                                            
+                                            $estaresuelto = true;
+                                            $nota = $datanota['nota'];
+                                        }
+                                    }
+                                }
+                                //$estaresuelto = true;
                             }
 
                             $semana[$d][] = [
                                 'estaresuelto' => $estaresuelto,
-                                'practica' => $practica
+                                'practica' => $practica,
+                                'nota' => $nota
                             ];
                         }
                     }
