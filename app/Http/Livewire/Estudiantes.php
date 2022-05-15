@@ -29,6 +29,8 @@ class Estudiantes extends Component
         $fechaJueves =  date('Ymd',strtotime('this week +3 days'));
         $fechaViernes =  date('Ymd',strtotime('this week +4 days'));
 
+        
+
         $dias[$fechaLunes] = [];
         $dias[$fechaMartes] = [];
         $dias[$fechaMiercoles] = [];
@@ -46,8 +48,8 @@ class Estudiantes extends Component
 
         if($this->gradoseleccionado!=null){
             
-            $from = date('Y/m/d',strtotime('this week'));
-            $to = date('Y/m/d',strtotime('this week +4 days'));
+            $from = date('Y/m/d',strtotime('this week')); //de lunes
+            $to = date('Y/m/d',strtotime('this week +4 days'));//a viernes
             //$from = date('d/m/Y',strtotime('03/04/2022'));
             //$to = date('d/m/Y',strtotime('07/04/2022'));
 
@@ -62,12 +64,20 @@ class Estudiantes extends Component
             }
 
             
-            $puntajes = Total_puntos::where(['grado_id'=>$this->gradoseleccionado])->whereBetween('created_at',[$from,$to])->get();
+
+            
+            //$puntajes = Total_puntos::where(['grado_id'=>$this->gradoseleccionado])->whereBetween('updated_at',[$from,$to])->get();
             $practicas = Practica::whereHas('grados', function($query){
                 $query->where(['nivel_id'=>$this->gradoseleccionado]);
             })->get();
 
-           
+            $arrPracticasPermitidas = [];
+            if($practicas->count()>0){
+                foreach($practicas as $practica){
+                    $arrPracticasPermitidas[] = $practica->id;
+                }
+            }
+            $puntajes = Total_puntos::where(['grado_id'=>$this->gradoseleccionado])->whereIn('tarea_id', $arrPracticasPermitidas)->get();
 
             if($estudiantes->count()>0){
                 foreach($estudiantes as $estudiante){
