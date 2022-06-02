@@ -176,10 +176,10 @@ class Estudiantes extends Component
         }
     }
     public function drop($id){
-        $user = User::find($id);
+        /*$user = User::find($id);
         if($user!=null){
             
             $user->delete();
-        }
+        }*/
     }
 }

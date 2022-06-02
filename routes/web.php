@@ -30,6 +30,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/start',function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->any('/practica',[PracticaController::class,'index'])->name('practica');
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/send',function () {
+    return view('send');
+})->name('send');
+
 Route::get('/registrar',[RegistroController::class,'index'])->name('registrar');
 Route::post('/registrar/store',[RegistroController::class,'store'])->name('registrar.store');
 
